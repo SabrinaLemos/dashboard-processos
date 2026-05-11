@@ -346,3 +346,10 @@ st.dataframe(
 
 st.write("")
 st.caption("Aether ESG Intelligence © 2026")
+from automation.navegador import Navegador
+
+print("Sistema ESG iniciado")
+
+navegador = Navegador()
+
+navegador.iniciar()
