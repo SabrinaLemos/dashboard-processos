@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ==================================================
-# CSS CUSTOM
+# CSS
 # ==================================================
 
 st.markdown("""
@@ -39,8 +39,6 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-/* TITLES */
-
 .big-title {
     font-size: 42px;
     font-weight: 700;
@@ -52,8 +50,6 @@ section[data-testid="stSidebar"] {
     font-size: 18px;
     margin-bottom: 20px;
 }
-
-/* KPI CARD */
 
 .kpi-card {
     background: linear-gradient(
@@ -68,6 +64,8 @@ section[data-testid="stSidebar"] {
     border: 1px solid rgba(255,255,255,0.06);
 
     transition: 0.3s;
+
+    min-height: 180px;
 }
 
 .kpi-card:hover {
@@ -78,20 +76,20 @@ section[data-testid="stSidebar"] {
 .kpi-title {
     font-size: 15px;
     color: #94A3B8;
+    margin-bottom: 20px;
 }
 
 .kpi-value {
     font-size: 42px;
     font-weight: bold;
     color: white;
+    margin-bottom: 15px;
 }
 
 .kpi-positive {
     color: #00FFA3;
     font-size: 15px;
 }
-
-/* ALERT */
 
 .alert-box {
     background: linear-gradient(
@@ -106,8 +104,6 @@ section[data-testid="stSidebar"] {
 
     border-radius: 16px;
 }
-
-/* TABLE */
 
 [data-testid="stDataFrame"] {
     border-radius: 18px;
@@ -182,101 +178,85 @@ dados = pd.DataFrame({
 
 if pagina == "Overview":
 
-    st.markdown("""
-    <div class="big-title">
-        Aether ESG Intelligence
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="big-title">
+            Aether ESG Intelligence
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    st.markdown("""
-    <div class="subtitle">
-        Plataforma autônoma de sustentabilidade corporativa
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="subtitle">
+            Plataforma autônoma de sustentabilidade corporativa
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    # KPI SECTION
+    # ==================================================
+    # KPI CARDS
+    # ==================================================
 
     c1, c2, c3, c4 = st.columns(4)
 
-    with c1:
+    cards = [
+        (
+            "Eficiência Energética",
+            "94%",
+            "▲ +12% este mês"
+        ),
 
-        st.markdown("""
-        <div class="kpi-card">
+        (
+            "Emissões CO₂",
+            "-31%",
+            "▲ redução sustentável"
+        ),
 
-            <div class="kpi-title">
-                Eficiência Energética
-            </div>
+        (
+            "Automação ESG",
+            "87%",
+            "▲ processos inteligentes"
+        ),
 
-            <div class="kpi-value">
-                94%
-            </div>
+        (
+            "ESG Score Global",
+            "AAA",
+            "▲ conformidade máxima"
+        )
+    ]
 
-            <div class="kpi-positive">
-                ▲ +12% este mês
-            </div>
+    for col, card in zip(
+        [c1, c2, c3, c4],
+        cards
+    ):
 
-        </div>
-        """, unsafe_allow_html=True)
+        titulo, valor, status = card
 
-    with c2:
+        with col:
 
-        st.markdown("""
-        <div class="kpi-card">
+            st.markdown(
+                f"""
+                <div class="kpi-card">
 
-            <div class="kpi-title">
-                Emissões CO₂
-            </div>
+                    <div class="kpi-title">
+                        {titulo}
+                    </div>
 
-            <div class="kpi-value">
-                -31%
-            </div>
+                    <div class="kpi-value">
+                        {valor}
+                    </div>
 
-            <div class="kpi-positive">
-                ▲ redução sustentável
-            </div>
+                    <div class="kpi-positive">
+                        {status}
+                    </div>
 
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-
-        st.markdown("""
-        <div class="kpi-card">
-
-            <div class="kpi-title">
-                Automação ESG
-            </div>
-
-            <div class="kpi-value">
-                87%
-            </div>
-
-            <div class="kpi-positive">
-                ▲ processos inteligentes
-            </div>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c4:
-
-        st.markdown("""
-        <div class="kpi-card">
-
-            <div class="kpi-title">
-                ESG Score Global
-            </div>
-
-            <div class="kpi-value">
-                AAA
-            </div>
-
-            <div class="kpi-positive">
-                ▲ conformidade máxima
-            </div>
-
-        </div>
-        """, unsafe_allow_html=True)
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
     st.write("")
 
@@ -348,21 +328,24 @@ if pagina == "Overview":
         )
 
     # ==================================================
-    # ALERT
+    # ALERTA IA
     # ==================================================
 
-    st.markdown("""
-    <div class="alert-box">
-        <b>IA Corporativa:</b>
-        Detectamos uma oportunidade de otimização energética
-        de 18% no setor industrial sul.
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="alert-box">
+            <b>IA Corporativa:</b>
+            Detectamos uma oportunidade de otimização energética
+            de 18% no setor industrial sul.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.write("")
 
     # ==================================================
-    # TABLE
+    # TABELA
     # ==================================================
 
     st.subheader("Análise Estratégica")
